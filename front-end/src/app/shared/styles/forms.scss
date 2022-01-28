@@ -1,0 +1,12 @@
+@import './config.scss';
+.required {
+  &::after {
+    content: "*";
+    color: $danger;
+  }
+}
+.ng-invalid{
+    &.ng-touched{
+        border-color: $danger;
+    }
+}

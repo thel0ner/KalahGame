@@ -1,0 +1,46 @@
+<form [formGroup]="signInForm" (ngSubmit)="signIn()">
+    <div class="row border rounded shadow-sm mt-lg-5 mt-md-3 mt-2">
+        <div class="col-12 pt-1">
+            <strong class="terminal">
+                Sign in
+            </strong>
+        </div>
+        <div class="col-12">
+            <label for="username" class="small mb-1 required">
+                Username:
+            </label>
+            <input type="text" class="form-control" formControlName="username" id="username">
+            <small class="text-danger"
+                *ngIf="signInForm.get('username')?.hasError('required') && signInForm.get('username')?.touched">
+                <strong>Username</strong> is required
+            </small>
+        </div>
+        <div class="col-12">
+            <label for="password" class="small mb-1 required">
+                Password:
+            </label>
+            <input type="password" class="form-control" formControlName="password" id="password">
+            <small class="text-danger"
+                *ngIf="signInForm.get('password')?.hasError('required') && signInForm.get('password')?.touched">
+                <strong>Password</strong> is required
+            </small>
+        </div>
+        <div class="col-12 d-flex justify-content-between p-1 align-items-center">
+            <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="signIn()">
+                <ng-container *ngIf="loading; then ShowLoading; else ShowSignInText"></ng-container>
+                <ng-template #ShowLoading>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Checking...
+                </ng-template>
+                <ng-template #ShowSignInText>
+                    Sign in
+                </ng-template>
+            </button>
+            <span>
+                <a [routerLink]="['/auth/signup']">Sign up</a>
+                /
+                <a [routerLink]="['/auth/password']">Forgot your password?</a>
+            </span>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,17 @@
+<div class="row shadow-sm border rounded board border-dark">
+    <div class="col-12 d-flex justify-content-between">
+        <div class="w-25 d-inline-flex h-100">
+            <app-store [totalSeeds]="gameData.machineStore" class="w-100"></app-store>
+        </div>
+        <div class="w-50 d-inline-flex flex-column justify-content-between">
+            <app-arena [pitsData]="gameData.machinePits.reverse()" class="w-100 d-flex justify-content-between p-1">
+            </app-arena>
+            <app-arena class="w-100 d-flex justify-content-between p-1" (selectedPit)="listenForPlayersSelections($event)"
+                [pitsData]="gameData.playerPits">
+            </app-arena>
+        </div>
+        <div class="w-25 d-inline-flex h-100">
+            <app-store [totalSeeds]="gameData.playerStore" class="w-100"></app-store>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+    <div class="row border rounded shadow-sm mt-lg-5 mt-md-3 mt-2">
+        <div class="col-12 pt-1">
+            <strong class="terminal">
+                Sign up
+            </strong>
+        </div>
+        <div class="col-12">
+            <label for="username" class="small mb-1 required">
+                Username:
+            </label>
+            <input type="text" class="form-control" formControlName="username" id="username">
+            <small class="text-danger"
+                *ngIf="signUpForm.get('username')?.hasError('required') && signUpForm.get('username')?.touched">
+                <strong>Username</strong> is required
+            </small>
+            <small class="text-danger d-block"
+                *ngIf="signUpForm.get('username')?.hasError('minlength') && signUpForm.get('username')?.touched">
+                Username must be at least 5 characters
+            </small>
+        </div>
+        <div class="col-12">
+            <label for="password" class="small mb-1 required">
+                Password:
+            </label>
+            <input type="password" class="form-control" formControlName="password" id="password">
+            <small class="text-info">
+                Hint: Password must be at least 8 characters and must contain number, letters and special characters.
+            </small>
+            <small class="text-danger d-block"
+                *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">
+                <strong>Password</strong> is required
+            </small>
+            <small class="text-danger d-block"
+                *ngIf="signUpForm.get('password')?.hasError('pattern') && signUpForm.get('password')?.touched">
+                choosen password is weak! pick a stronger one!
+            </small>
+        </div>
+        <div class="col-12">
+            <label for="email" class="small mb-1 required">
+                Email:
+            </label>
+            <input type="text" class="form-control" formControlName="email" id="email">
+            <small class="text-danger"
+                *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">
+                <strong>Email</strong> is required
+            </small>
+            <small class="text-danger d-block"
+                *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">
+                Please provide a valid email address.
+            </small>
+        </div>
+        <div class="col-12 d-flex justify-content-between p-1 align-items-center">
+            <button type="submit" class="btn btn-primary" [disabled]="loading" (click)="signUp()">
+                <ng-container *ngIf="loading; then ShowLoading; else ShowSignInText"></ng-container>
+                <ng-template #ShowLoading>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Checking...
+                </ng-template>
+                <ng-template #ShowSignInText>
+                    Sign up
+                </ng-template>
+            </button>
+            <span>
+                <a [routerLink]="['/auth/signin']">Sign in</a>
+                /
+                <a [routerLink]="['/auth/password']">Forgot your password?</a>
+            </span>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4 class="modal-title">Session is about to expire!</h4>
+</div>
+<div class="modal-body">
+    <p>
+        Your session is about to expire, would you like to extend it so you can stay longer?
+    </p>
+    <p><ngb-progressbar [value]="progressBarValue"></ngb-progressbar></p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="close()">Yes!</button>
+</div>

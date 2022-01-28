@@ -1,0 +1,27 @@
+<a [routerLink]="['/games/list']">Back to score board</a>
+<div class="w-100">
+    <strong class="terminal">
+        {{message}}
+    </strong>
+</div>
+<ng-container *ngIf="gameData">
+    <ng-container *ngIf="gameData.status;then GameFinishedAnouncement;else GameBoard"></ng-container>
+    <ng-template #GameFinishedAnouncement>
+        <div class="alert" role="alert" [class.alert-danger]="!gameData.won" [class.alert-success]="gameData.won">
+            <strong class="d-block">Game is Finished!</strong>
+            <strong>Status: </strong>
+            <span>
+                As the color of this box implies, you have
+                <strong>
+                    {{gameData.won | gameStatus}}
+                </strong>
+                the game!
+            </span>
+        </div>
+    </ng-template>
+    <ng-template #GameBoard>
+        <div class="p-1">
+            <app-board [gameData]="gameData" (chosenPit)="listenForChosenPit($event)"></app-board>
+        </div>
+    </ng-template>
+</ng-container>

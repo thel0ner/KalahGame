@@ -1,0 +1,19 @@
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">Game!</a>
+    <div>
+        <button class="btn btn-outline-secondary mr-1" (click)="newGame()">
+            Start a new Game!
+        </button>
+        <button type="button" aria-label="log out" class="btn btn-outline-secondary" (click)="logOut()">
+            Log out
+        </button>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<app-refresh-token></app-refresh-token>

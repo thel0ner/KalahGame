@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-12 pt-1">
+        <strong class="terminal">
+            Your score board
+        </strong>
+    </div>
+    <div class="col-12">
+        <ngx-datatable class="bootstrap" [limit]="pageSize" [rowHeight]="50" [externalPaging]="true" [footerHeight]="50"
+            [loadingIndicator]="loading" (page)="paginator($event)" [count]="response.totalItems" [columnMode]="'force'"
+            [offset]="response.currentPage" [rows]="response?.games">
+            <ngx-datatable-column name="start date" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row?.startDate | date: 'short' }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="end date" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <span *ngIf="row?.endDate">
+                        {{ row?.endDate | date: 'short' }}
+                    </span>
+                    <span *ngIf="row?.endDate === null">
+                        -
+                    </span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="status" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <span [class.text-success]="row?.status === true" [class.text-info]="row?.status === false">
+                        {{ row?.status === true ? 'finished' : 'open' }}
+                    </span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="winner" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <span [class.text-success]="row?.won === true && row?.status === true"
+                        [class.text-danger]="row?.won === false && row?.status === true">
+                        {{ row?.status === true ? row?.won === true ? 'winner' : 'loser' : '-' }}
+                    </span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="your store" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row?.playerStore }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="machine's store" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row?.machineStore}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="operation" [sortable]="false">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="deleteGame(row?.id)">
+                        Delete
+                    </button>
+                    <a class="btn btn-info btn-sm ml-1" [routerLink]="['/games/play/'+row?.id]"
+                        *ngIf="row?.status === false">
+                        Play
+                    </a>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>

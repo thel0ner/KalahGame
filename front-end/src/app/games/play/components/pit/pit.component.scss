@@ -1,0 +1,10 @@
+:host{
+    display: inline-block;
+    .pit{
+        width: 4rem;
+        height: 8rem;
+        &.cursor-pointer{
+            cursor: pointer !important;
+        }
+    }
+}
